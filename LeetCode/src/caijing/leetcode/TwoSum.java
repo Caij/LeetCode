@@ -1,5 +1,8 @@
 package caijing.leetcode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /*
 Given an array of integers, find two numbers such that they add up to a specific target number.
 
@@ -21,8 +24,9 @@ public class TwoSum {
 	 */
 	public static void main(String[] args) {
 		int[] array = {2, 7, 11, 2, 15, 7};
-		int taget = 9;
-		twoSum_1(array, taget);
+		int target = 9;
+//		twoSum_1(array, target);
+		twoSum_2(array, target);
 	}
 	
 	/**
@@ -30,19 +34,31 @@ public class TwoSum {
 	 * @param array
 	 * @param taget
 	 */
-	public static void twoSum_1(int[] array, int taget) {
+	public static void twoSum_1(int[] array, int target) {
 		for (int i = 0; i < array.length; i++) {
 			int temp = array[i];
 			for (int j = i+1; j < array.length; j++) {
-				if (temp == taget-array[j]) {
+				if (temp == target-array[j]) {
 					System.out.println((i+1) + "  and  " + (j+1)); //加1是因为上面的index是第一个数输出的是1不是0
 				}
 			}
 		}
 	}
 	
-	public static void twoSum_2(int[] array, int taget) {
-		
+	/**
+	 * 在LeetCode 官网还有这种解法 时间复杂度为O(n), 我不这样认为 ，其实map的get里面机制也是循环，
+	 * 还有就是如果不止一组数的和为target， 就显示不全。
+	 * @param array
+	 * @param taget
+	 */ 
+	public static void twoSum_2(int[] array, int target) {
+	    Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+	    for (int i = 0; i < array.length; i++) {
+	        if (map.containsKey(target - array[i])) {
+	        	System.out.println((i+1) + "  and  " +map.get(target - array[i]));
+	        }
+	        map.put(array[i], i + 1);
+	    }
 	}
 
 }
