@@ -12,7 +12,8 @@ public class MuSort {
 //		shellSort1(datas);
 //		shellSort2(datas);
 //		quickSort(datas, 0, datas.length - 1);
-		heapSort(datas);
+//		heapSort(datas);
+		bubblingSort(datas);
 		for (int i = 0; i < datas.length; i++) {
 			System.out.print(datas[i] + ",");
 		}
@@ -182,6 +183,22 @@ public class MuSort {
 				datas[j] = datas[j - 1];
 			}
 			datas[end + 1] = data;
+		}
+	}
+
+	/**
+	 * 冒泡排序
+	 * @param datas
+	 */
+	public static void bubblingSort(int[] datas) {
+		for (int i = 0; i < datas.length; i ++) {
+			for (int j = datas.length - 1; j > i; j --) {
+				if (datas[j] < datas[j - 1]) {
+					int temp = datas[j - 1];
+					datas[j - 1] = datas[j];
+					datas[j] = temp;
+				}
+			}
 		}
 	}
 
