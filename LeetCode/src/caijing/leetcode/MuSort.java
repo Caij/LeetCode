@@ -1,19 +1,24 @@
 package caijing.leetcode;
 
+import java.util.Stack;
+
 public class MuSort {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int[] datas = {1,4,7,3,8,9,2,6,5, 2, 1};
+		int[] datas = {1,4,7,3,8,9,2,6,5,2,1};
 //		insertionSort(datas);
 //		bInsertionSort(datas);
 //		shellSort1(datas);
 //		shellSort2(datas);
-		quickSort(datas, 0, datas.length - 1);
+//		quickSort递归(datas, 0, datas.length - 1);
+//		quickSort非递归(datas, 0, datas.length - 1);
 //		heapSort(datas);
 //		bubblingSort(datas);
+//		mergeSort递归(datas, 0, datas.length - 1);
+		mergeSort非递归(datas);
 		for (int i = 0; i < datas.length; i++) {
 			System.out.print(datas[i] + ",");
 		}
@@ -59,14 +64,43 @@ public class MuSort {
 	}
 	
 	/**
-	 * 快速排序
+	 * 快速排序递归
 	 * @param datas
 	 */
-	public static void quickSort(int[] datas, int left, int right) {
+	public static void quickSort递归(int[] datas, int left, int right) {
 		if (left < right) {
 			int i = partition(datas, left, right);
-			quickSort(datas, left, i - 1);
-			quickSort(datas, i + 1, right);
+			if (left < i - 1) {
+				quickSort递归(datas, left, i - 1);
+			}
+
+			if (right > i + 1) {
+				quickSort递归(datas, i + 1, right);
+			}
+		}
+	}
+
+	/**
+	 * 快速排序非递归
+	 * @param datas
+	 */
+	public static void quickSort非递归(int[] datas, int left, int right) {
+		Stack<Integer> stack = new Stack<Integer>();
+		stack.push(left);
+		stack.push(right);
+		while (!stack.isEmpty()) {
+			int r = stack.pop();
+			int l = stack.pop();
+			int i = partition(datas, l, r);
+			if (l < i - 1) {
+				stack.push(left);
+				stack.push(i - 1);
+			}
+
+			if (r > i + 1) {
+				stack.push( i + 1);
+				stack.push(right);
+			}
 		}
 	}
 
@@ -102,7 +136,7 @@ public class MuSort {
 	 * @param datas
 	 */
 	public static void shellSort1(int[] datas) {
-		//将数据分为一次分为多组
+		//将数据分为一次分为多组, i表示多少组
 		for(int i = datas.length / 2; i > 0; i /= 2) {
 			//对每个组进行排序
 			for(int j = 0; j < i; j ++) {
@@ -141,7 +175,7 @@ public class MuSort {
 			}
 		}
 	}
-	
+
 	/**
 	 * 插入排序
 	 * @param datas
@@ -199,6 +233,76 @@ public class MuSort {
 					datas[j] = temp;
 				}
 			}
+		}
+	}
+
+	/**
+	 * 归并排序递归
+	 * @param datas
+	 */
+	public static void mergeSort递归(int[] datas, int left, int right) {
+		if (left < right){
+			int mid = (left + right) / 2;
+			mergeSort递归(datas, left, mid);    //左边有序
+			mergeSort递归(datas, mid + 1, right); //右边有序
+			mergeData(datas, left, mid, right); //再将二个有序数列合并
+		}
+	}
+
+	/**
+	 * 归并排序非递归
+	 * @param datas
+	 */
+	public static void mergeSort非递归(int[] datas) {
+		int gap = 1;
+		int i = 0;
+		while (gap < datas.length) {
+			// 归并gap长度的两个相邻子表
+			for (i = 0; i + 2 * gap < datas.length; i = i + 2 * gap) {
+				mergeData(datas, i, i + gap - 1, i + 2 * gap - 1);
+			}
+
+			// 余下两个子表，后者长度小于gap
+			if (i + gap - 1 < datas.length) {
+				mergeData(datas, i, i + gap - 1, datas.length - 1);
+			}
+
+			gap *= 2;
+		}
+	}
+
+	private static void mergeData(int[] datas, int left, int mid, int right) {
+		int i = left;
+		int j =  mid + 1;
+		int k = 0;
+		int[] temps = new int[right - left + 1];
+
+		while (i <= mid && j <= right) {
+			if (datas[i] < datas[j]) {
+				temps[k] = datas[i];
+				i ++;
+			}else {
+				temps[k] = datas[j];
+				j ++;
+			}
+			k ++;
+		}
+
+		while (i <= mid) {
+			temps[k] = datas[i];
+			k ++;
+			i ++;
+		}
+
+		while (j <= right) {
+			temps[k] = datas[j];
+			k ++;
+			j ++;
+		}
+
+		// 将合并序列复制到原始序列中
+		for (k = 0, i = left; i <= right; i++, k++) {
+			datas[i] = temps[k];
 		}
 	}
 
