@@ -11,9 +11,9 @@ public class MuSort {
 //		bInsertionSort(datas);
 //		shellSort1(datas);
 //		shellSort2(datas);
-//		quickSort(datas, 0, datas.length - 1);
+		quickSort(datas, 0, datas.length - 1);
 //		heapSort(datas);
-		bubblingSort(datas);
+//		bubblingSort(datas);
 		for (int i = 0; i < datas.length; i++) {
 			System.out.print(datas[i] + ",");
 		}
@@ -63,37 +63,37 @@ public class MuSort {
 	 * @param datas
 	 */
 	public static void quickSort(int[] datas, int left, int right) {
+		if (left < right) {
+			int i = partition(datas, left, right);
+			quickSort(datas, left, i - 1);
+			quickSort(datas, i + 1, right);
+		}
+	}
+
+	private static int partition(int[] datas, int left, int right) {
 		int i = left;
 		int j = right;
 		int temp = datas[i];
 		while (i < j) {
 			while (temp < datas[j] && i < j) {
-				j --;
+				j--;
 			}
 			if (i < j) {
 				datas[i] = datas[j];
-				i ++;
+				i++;
 			}
-			
+
 			while (temp > datas[i] && i < j) {
-				i ++;
+				i++;
 			}
 			if (i < j) {
 				datas[j] = datas[i];
-				j --;
+				j--;
 			}
-			
+
 			datas[i] = temp;
-			
-			if (left < i - 1) {
-				quickSort(datas, left, i - 1);
-			}
-			
-			if (i + 1 < right) {
-				quickSort(datas, i + 1, right);
-			}
-			
 		}
+		return i;
 	}
 	
 	
