@@ -24,13 +24,13 @@ package caijing.leetcode.tree;
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class BinaryNode<T> {
+public class TreeNode<T> {
 
-  private final T data;
-  private BinaryNode<T> left;
-  private BinaryNode<T> right;
+  public final T data;
+  public TreeNode<T> left;
+  public TreeNode<T> right;
 
-  public BinaryNode(T data) {
+  public TreeNode(T data) {
     this.data = data;
   }
 
@@ -38,19 +38,19 @@ public class BinaryNode<T> {
     return data;
   }
 
-  public BinaryNode<T> getLeft() {
+  public TreeNode<T> getLeft() {
     return left;
   }
 
-  public void setLeft(BinaryNode<T> left) {
+  public void setLeft(TreeNode<T> left) {
     this.left = left;
   }
 
-  public BinaryNode<T> getRight() {
+  public TreeNode<T> getRight() {
     return right;
   }
 
-  public void setRight(BinaryNode<T> right) {
+  public void setRight(TreeNode<T> right) {
     this.right = right;
   }
 
@@ -64,9 +64,9 @@ public class BinaryNode<T> {
 
   @Override public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof BinaryNode)) return false;
+    if (!(o instanceof TreeNode)) return false;
 
-    BinaryNode that = (BinaryNode) o;
+    TreeNode that = (TreeNode) o;
 
     if (!data.equals(that.data)) return false;
     if (left != null ? !left.equals(that.left) : that.left != null) return false;

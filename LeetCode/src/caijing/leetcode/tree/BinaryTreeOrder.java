@@ -9,45 +9,45 @@ import java.util.Stack;
  */
 public class BinaryTreeOrder {
 
-    public static List<Integer> binaryTree前序遍历递归(BinaryNode<Integer> binaryNode) {
+    public static List<Integer> binaryTree前序遍历递归(TreeNode<Integer> treeNode) {
         List<Integer> results = new ArrayList<Integer>();
-        if (binaryNode != null) {
-            results.add(binaryNode.getData());
-            results.addAll(binaryTree前序遍历递归(binaryNode.getLeft()));
-            results.addAll(binaryTree前序遍历递归(binaryNode.getRight()));
+        if (treeNode != null) {
+            results.add(treeNode.getData());
+            results.addAll(binaryTree前序遍历递归(treeNode.getLeft()));
+            results.addAll(binaryTree前序遍历递归(treeNode.getRight()));
             return results;
         }
         return results;
     }
 
-    public static List<Integer> binaryTree中序遍历递归(BinaryNode<Integer> binaryNode) {
+    public static List<Integer> binaryTree中序遍历递归(TreeNode<Integer> treeNode) {
         List<Integer> results = new ArrayList<Integer>();
-        if (binaryNode != null) {
-            results.addAll(binaryTree中序遍历递归(binaryNode.getLeft()));
-            results.add(binaryNode.getData());
-            results.addAll(binaryTree中序遍历递归(binaryNode.getRight()));
+        if (treeNode != null) {
+            results.addAll(binaryTree中序遍历递归(treeNode.getLeft()));
+            results.add(treeNode.getData());
+            results.addAll(binaryTree中序遍历递归(treeNode.getRight()));
             return results;
         }
         return results;
     }
 
-    public static List<Integer> binaryTree后序遍历递归(BinaryNode<Integer> binaryNode) {
+    public static List<Integer> binaryTree后序遍历递归(TreeNode<Integer> treeNode) {
         List<Integer> results = new ArrayList<Integer>();
-        if (binaryNode != null) {
-            results.addAll(binaryTree后序遍历递归(binaryNode.getLeft()));
-            results.addAll(binaryTree后序遍历递归(binaryNode.getRight()));
-            results.add(binaryNode.getData());
+        if (treeNode != null) {
+            results.addAll(binaryTree后序遍历递归(treeNode.getLeft()));
+            results.addAll(binaryTree后序遍历递归(treeNode.getRight()));
+            results.add(treeNode.getData());
             return results;
         }
         return results;
     }
 
-    public static List<Integer> binaryTree前序遍历非递归(BinaryNode<Integer> binaryNode) {
+    public static List<Integer> binaryTree前序遍历非递归(TreeNode<Integer> treeNode) {
         List<Integer> results = new ArrayList<Integer>();
-        Stack<BinaryNode<Integer>> cache = new Stack<BinaryNode<Integer>>();
-        cache.push(binaryNode);
+        Stack<TreeNode<Integer>> cache = new Stack<TreeNode<Integer>>();
+        cache.push(treeNode);
         while (!cache.isEmpty()) {
-            BinaryNode<Integer> node = cache.pop();
+            TreeNode<Integer> node = cache.pop();
             results.add(node.getData());
 
             if (node.hasRight()) {
@@ -61,16 +61,16 @@ public class BinaryTreeOrder {
         return results;
     }
 
-    public static List<Integer> binaryTree中序遍历非递归(BinaryNode<Integer> binaryNode) {
+    public static List<Integer> binaryTree中序遍历非递归(TreeNode<Integer> treeNode) {
         List<Integer> results = new ArrayList<Integer>();
-        Stack<BinaryNode<Integer>> cache = new Stack<BinaryNode<Integer>>();
-        BinaryNode<Integer> current = binaryNode;
+        Stack<TreeNode<Integer>> cache = new Stack<TreeNode<Integer>>();
+        TreeNode<Integer> current = treeNode;
         while (!cache.isEmpty() || current != null) {
             if (current != null) {
                 cache.push(current);
                 current = current.getLeft();
             }else {
-                BinaryNode<Integer> node = cache.pop();
+                TreeNode<Integer> node = cache.pop();
                 results.add(node.getData());
                 current = node.getRight();
             }
@@ -78,12 +78,12 @@ public class BinaryTreeOrder {
         return results;
     }
 
-    public static List<Integer> binaryTree后序遍历非递归(BinaryNode<Integer> binaryNode) {
+    public static List<Integer> binaryTree后序遍历非递归(TreeNode<Integer> treeNode) {
         List<Integer> results = new ArrayList<Integer>();
-        Stack<BinaryNode<Integer>> cache = new Stack<BinaryNode<Integer>>();
-        cache.push(binaryNode);
-        BinaryNode<Integer> pre = null;
-        BinaryNode<Integer> current = null;
+        Stack<TreeNode<Integer>> cache = new Stack<TreeNode<Integer>>();
+        cache.push(treeNode);
+        TreeNode<Integer> pre = null;
+        TreeNode<Integer> current = null;
         while (!cache.isEmpty()) {
             current = cache.peek();
             if (pre == null || pre.getLeft() == current || pre.getRight() == current) {

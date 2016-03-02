@@ -5,35 +5,35 @@ package caijing.leetcode.tree;
  */
 public class BinaryTree {
 
-    private static BinaryNode<Integer> root;
+    private static TreeNode<Integer> root;
 
     static {
-        root = new BinaryNode<Integer>(10);
-        BinaryNode<Integer> node1 = new BinaryNode<Integer>(8);
-        BinaryNode<Integer> node2 = new BinaryNode<Integer>(7);
+        root = new TreeNode<Integer>(10);
+        TreeNode<Integer> node1 = new TreeNode<Integer>(8);
+        TreeNode<Integer> node2 = new TreeNode<Integer>(7);
         root.setLeft(node1);
         root.setRight(node2);
 
-        BinaryNode<Integer> node3 = new BinaryNode<Integer>(3);
-        BinaryNode<Integer> node4 = new BinaryNode<Integer>(5);
+        TreeNode<Integer> node3 = new TreeNode<Integer>(3);
+        TreeNode<Integer> node4 = new TreeNode<Integer>(5);
         node1.setLeft(node3);
         node1.setRight(node4);
 
-        BinaryNode<Integer> node5 = new BinaryNode<Integer>(6);
-        BinaryNode<Integer> node6 = new BinaryNode<Integer>(7);
+        TreeNode<Integer> node5 = new TreeNode<Integer>(6);
+        TreeNode<Integer> node6 = new TreeNode<Integer>(7);
         node3.setRight(node5);
         node4.setLeft(node6);
 
-        BinaryNode<Integer> node7 = new BinaryNode<Integer>(4);
+        TreeNode<Integer> node7 = new TreeNode<Integer>(4);
         node2.setRight(node7);
 
-        BinaryNode<Integer> node8 = new BinaryNode<Integer>(8);
-        BinaryNode<Integer> node9 = new BinaryNode<Integer>(9);
+        TreeNode<Integer> node8 = new TreeNode<Integer>(8);
+        TreeNode<Integer> node9 = new TreeNode<Integer>(9);
         node7.setLeft(node8);
         node7.setRight(node9);
     }
 
-    public static BinaryNode<Integer> createBinaryTree() {
+    public static TreeNode<Integer> createBinaryTree() {
         return root;
     }
 }
