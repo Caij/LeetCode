@@ -1,4 +1,4 @@
-package caijing.leetcode;
+package caijing.leetcode.sort;
 
 import java.util.Stack;
 
@@ -15,10 +15,10 @@ public class MuSort {
 //		shellSort2(datas);
 //		quickSort递归(datas, 0, datas.length - 1);
 //		quickSort非递归(datas, 0, datas.length - 1);
-//		heapSort(datas);
+		heapSort(datas);
 //		bubblingSort(datas);
 //		mergeSort递归(datas, 0, datas.length - 1);
-		mergeSort非递归(datas);
+//		mergeSort非递归(datas);
 		for (int i = 0; i < datas.length; i++) {
 			System.out.print(datas[i] + ",");
 		}
@@ -29,7 +29,7 @@ public class MuSort {
 	 * @param datas
 	 */
 	public static void heapSort(int[] datas) {
-		for (int i = datas.length/2; i >= 0; i--) {
+		for (int i = datas.length/2 - 1; i >= 0; i--) {
 			createHeap(datas, i, datas.length - 1);
 		}
 		
