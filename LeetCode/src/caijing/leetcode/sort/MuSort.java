@@ -30,7 +30,7 @@ public class MuSort {
 	 */
 	public static void heapSort(int[] datas) {
 		for (int i = datas.length/2 - 1; i >= 0; i--) {
-			createHeap(datas, i, datas.length - 1);
+			createMaxHeap(datas, i, datas.length - 1);
 		}
 		
 		int temp;
@@ -39,13 +39,13 @@ public class MuSort {
 			datas[0] = datas[j];
 			datas[j] = temp;
 			
-			createHeap(datas, 0, j - 1);
+			createMaxHeap(datas, 0, j - 1);
 		}
 	}
 	
-	public static void createHeap(int[] datas, int i, int n) {
-		int temp = datas[i];
-		int j = i * 2;
+	public static void createMaxHeap(int[] datas, int i,/**最后节点*/int n) {
+		int temp = datas[i]; //当前节点
+		int j = i * 2; //当前节点的左子节点
 		while (j < n) {
 			if (j < n && datas[j] < datas[j + 1]) {
 				j ++;
@@ -84,6 +84,7 @@ public class MuSort {
 	 * 快速排序非递归
 	 * @param datas
 	 */
+
 	public static void quickSort非递归(int[] datas, int left, int right) {
 		Stack<Integer> stack = new Stack<Integer>();
 		stack.push(left);
